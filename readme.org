@@ -1,0 +1,9 @@
+* Java Swing image representation
+Images are represented as RGBA in CSS: rgba(R, G, B, A). In Java Swing, there
+seems to be a hexadecimal encoding. Everything is encoded within an integer.
+
+Integer: 32 bits.
+
+RGBA, (0-255): 8 bits, 4 values: 32 bits.
+
+Integer encoding of RGBA values: #AARRGGBB, expressed in base16/hex.
