@@ -3,7 +3,10 @@ Setup:
 
 1. Install Homebrew
 2. Install git: `brew install git`
-3. Install clojure: `brew install clojure`
+3. Clone this repository: `git clone
+   https://github.com/teodorlu/alphasample.git`. You need to know where you
+   cloned it. When you run git clone URL, your project is cloned to the current directory.
+4. Install clojure: `brew install clojure`
 
 Usage:
 
