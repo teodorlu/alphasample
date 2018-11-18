@@ -1,4 +1,5 @@
-* Mac usage instructions
+# Mac usage instructions
+
 Setup:
 
 1. Install Homebrew
@@ -11,7 +12,9 @@ Setup:
 Usage:
 
 - In the project directory, run `clj -m alphasample.main`.
-* Java Swing image representation
+
+# Java Swing image representation
+
 Images are represented as RGBA in CSS: rgba(R, G, B, A). In Java Swing, there
 seems to be a hexadecimal encoding. Everything is encoded within an integer.
 
