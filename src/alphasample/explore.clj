@@ -46,39 +46,50 @@
 
 (def some-pixels (atom nil))
 (defn set-some-pixels! [pixels]
-  (reset! some-pixels pixels)
+  (reset! some-pixels (vec pixels))
   ;; Seq, not vector!
   pixels)
-
-@some-pixels
-
-(get @some-pixels 33)
 
 (do
   (defn make-20-opaque-pixels-red [pixels]
     (let [selection (sample/sample pixels opaque? 20)
-          special? (set selection)]
+          selected? (set selection)]
+      (prn (sort selection))
+      (prn "/" (count pixels))
       (mapv (fn [i]
-              (if false
-                [255 0 0 255] ;; red
+              (if (selected? i)
+                (do
+                  (println "special" i)
+                  [255 0 0 255])
                 (get pixels i)))
             (range (count pixels)))))
-  (make-20-opaque-pixels-red @some-pixels))
+  #_(make-20-opaque-pixels-red @some-pixels))
 
+(defn paint-some-red [pixels]
+  (vec (concat (take 900 (repeat [255 0 0 255]))
+               (drop 900 pixels))))
 
 (do
   (def new-img (image/load-image "/home/teodorlu/workspace/clojure/alphasample/Smiley.png"))
-  (def new-pixels (->> new-img
+  (def old-pixels (->> new-img
                        image/get-pixels
                        (map convert/color->rgba)
-                       set-some-pixels!
-                       (map (fn [[r g b a]]
-                              [r g b a]))
+                       vec))
+  (def selection (sample/sample old-pixels (fn [[r g b a]]
+                                             (> a 100)) 200))
+  (def selected? (set selection))
+  (defn pixel-filter [i]
+    (if (selected? i)
+      [255 0 0 255]
+      (get old-pixels i)
+      ))
+  (def new-pixels (->> (range (count old-pixels))
+                       (map pixel-filter)
                        (map convert/rgba->color)
                        ;; Now, back to a seq of long values. Can we get an image?
                        int-array))
   (image/set-pixels new-img new-pixels)
-  ;; (image/set-pixels new-img (int-array [16776960 16776960 16776960 16776960]))
+  (image/save new-img "/home/teodorlu/workspace/clojure/alphasample/Smiley-sampled.png")
   (image/show new-img)
   )
 
