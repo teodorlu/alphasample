@@ -10,7 +10,7 @@
 ;; Try to get the transparancy for the image.
 
 (def img
-  (image/load-image "/home/teodorlu/workspace/clojure/alphasample/Smiley.png"))
+  (image/load-image "/home/teodorlu/git/alphasample/Smiley.png"))
 
 (defn mod-pixels-rgba! [img rgba-filter]
   (image/set-pixels img
@@ -69,29 +69,31 @@
   (vec (concat (take 900 (repeat [255 0 0 255]))
                (drop 900 pixels))))
 
-(do
-  (def new-img (image/load-image "/home/teodorlu/workspace/clojure/alphasample/Smiley.png"))
-  (def old-pixels (->> new-img
-                       image/get-pixels
-                       (map convert/color->rgba)
-                       vec))
-  (def selection (sample/sample old-pixels (fn [[r g b a]]
-                                             (> a 100)) 200))
-  (def selected? (set selection))
-  (defn pixel-filter [i]
-    (if (selected? i)
-      [255 0 0 255]
-      (get old-pixels i)
-      ))
-  (def new-pixels (->> (range (count old-pixels))
-                       (map pixel-filter)
-                       (map convert/rgba->color)
-                       ;; Now, back to a seq of long values. Can we get an image?
-                       int-array))
-  (image/set-pixels new-img new-pixels)
-  (image/save new-img "/home/teodorlu/workspace/clojure/alphasample/Smiley-sampled.png")
-  (image/show new-img)
-  )
+(comment
+  (do
+    (def new-img (image/load-image "/home/teodorlu/workspace/clojure/alphasample/Smiley.png"))
+    (def old-pixels (->> new-img
+                         image/get-pixels
+                         (map convert/color->rgba)
+                         vec))
+    (def selection (sample/sample old-pixels (fn [[r g b a]]
+                                               (> a 100))
+                                  200))
+    (def selected? (set selection))
+    (defn pixel-filter [i]
+      (if (selected? i)
+        [255 0 0 255]
+        (get old-pixels i)
+        ))
+    (def new-pixels (->> (range (count old-pixels))
+                         (map pixel-filter)
+                         (map convert/rgba->color)
+                         ;; Now, back to a seq of long values. Can we get an image?
+                         int-array))
+    (image/set-pixels new-img new-pixels)
+    (image/save new-img "/home/teodorlu/workspace/clojure/alphasample/Smiley-sampled.png")
+    (image/show new-img)
+    ))
 
 
 
