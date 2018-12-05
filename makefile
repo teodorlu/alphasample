@@ -10,8 +10,14 @@ step-1:
 	mkdir -p resources/step-2
 	ls resources/step-1/*.png | clj -m alphasample.main 50 100 > resources/step-2/table.tsv
 
+# Just 3 results per image
+debug-1:
+	mkdir -p resources/step-2
+	ls resources/step-1/*.png | clj -m alphasample.main 3 100 > resources/step-2/smalltable.tsv
+
 step-2:
 	mkdir -p resources/step-3
+
 
 run:
 	echo 123

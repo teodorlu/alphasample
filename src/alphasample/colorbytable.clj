@@ -50,6 +50,24 @@
                                    last))]
       output-filename)))
 
+(defn color-images [output-dir data]
+  ;; Ensure that output directory exists
+  (clojure.java.io/make-parents (str output-dir "/testfile"))
+  (for [[fname fdata] data]
+    ;; A. copy image to where it should be
+
+    ;; Open image
+
+    ;; Color image
+
+    ;; Save image
+    (let [output-filename (str output-dir
+                               "/"
+                               (-> fname
+                                   (string/split #"/")
+                                   last))]
+      output-filename)))
+
 (comment
   (-> {}
       (collect-image-entry
@@ -66,8 +84,8 @@
      string/split-lines
      (map table-line->report-entry)
      (reduce collect-image-entry {})
-     (sample-output "resources/output/images")
-     pprint
+     (take 1)
+     (sample-output "resources/step-3")
      )
 
 (defn -main [output-folder]
