@@ -6,27 +6,6 @@
    [alphasample.sample :as sample]
    [clojure.string :as string]))
 
-;; Entry points:
-;;  - Main
-;;  - Input: Number of points, threshold
-;;  - Images to analyze
-;;  - Output: table.
-;;    - File name
-;;    - Pixel coordinate
-;;    - R value
-;;    - G value
-;;    - B value
-
-;; Sample input:
-;;  - One image file name on each line
-;;  - Command line: Number of points?
-
-;; Draw from sample?
-
-;; (defonce some-path "/home/teodorlu/git/alphasample/Smiley.png")
-;; (defonce some-img
-;;   (image/load-image some-path))
-
 (defn report-image [imagepath img samples threshold]
   (let [pixels (->> (image/get-pixels img)
                     (map convert/color->rgba)
@@ -45,6 +24,8 @@
 (defn report->table-line [{:keys [image-path pixel-nr rgba]}]
   (string/join "\t" (map str (concat [image-path pixel-nr] rgba))))
 
+;; Usage:
+;;  ls resources/input/*.png | clj -m alphasample.main 20 100.0
 
 (defn -main [samples threshold]
   (let [samples (Long/parseLong samples)
@@ -60,6 +41,3 @@
           (prn e)
           )
         ))))
-
-;; Usage:
-;;  ls Smiley*.png | clj -m alphasample.main 20 100.0
