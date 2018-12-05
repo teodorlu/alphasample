@@ -1,2 +1,6 @@
+# deps.edn temp files
 .cpcache
 .nrepl-port
+
+# OSX temp files
+**/.DS_Store
