@@ -23,3 +23,27 @@ Integer: 32 bits.
 RGBA, (0-255): 8 bits, 4 values: 32 bits.
 
 Integer encoding of RGBA values: #AARRGGBB, expressed in base16/hex.
+
+# Tabular results
+
+The script produces tabular results.
+
+The results look like this:
+
+```
+$ head -n 5 resources/output/table.tsv 
+resources/input/W_DJI-10, BE-1.png	1689	255	250	124	255
+resources/input/W_DJI-10, BE-1.png	1699	253	243	109	255
+resources/input/W_DJI-10, BE-1.png	1894	255	246	119	255
+resources/input/W_DJI-10, BE-1.png	2080	252	245	113	255
+resources/input/W_DJI-10, BE-1.png	2179	255	248	118	255
+```
+
+This means, with headings:
+
+| File path | pixel number | R | G | B | A |
+| resources/input/W_DJI-10, BE-1.png | 1689 | 255 | 250 | 124 | 255 |
+| resources/input/W_DJI-10, BE-1.png | 1699 | 253 | 243 | 109 | 255 |
+| resources/input/W_DJI-10, BE-1.png | 1894 | 255 | 246 | 119 | 255 |
+| resources/input/W_DJI-10, BE-1.png | 2080 | 252 | 245 | 113 | 255 |
+| resources/input/W_DJI-10, BE-1.png | 2179 | 255 | 248 | 118 | 255 |

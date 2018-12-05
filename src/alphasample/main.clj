@@ -23,9 +23,9 @@
 
 ;; Draw from sample?
 
-(defonce some-path "/home/teodorlu/git/alphasample/Smiley.png")
-(defonce some-img
-  (image/load-image some-path))
+;; (defonce some-path "/home/teodorlu/git/alphasample/Smiley.png")
+;; (defonce some-img
+;;   (image/load-image some-path))
 
 (defn report-image [imagepath img samples threshold]
   (let [pixels (->> (image/get-pixels img)
@@ -50,10 +50,16 @@
   (let [samples (Long/parseLong samples)
         threshold (Double/parseDouble threshold)]
     (doseq [imagepath (line-seq (java.io.BufferedReader. *in*))]
-      (let [img (image/load-image imagepath)]
-        (doseq [selection (report-image imagepath img samples threshold)]
-          (println (report->table-line selection))
-          )))))
+      (try
+        (let [img (image/load-image imagepath)]
+          (doseq [selection (report-image imagepath img samples threshold)]
+            (println (report->table-line selection))
+            ))
+        (catch Exception e
+          (println "Error processing exception for " imagepath ":")
+          (prn e)
+          )
+        ))))
 
 ;; Usage:
 ;;  ls Smiley*.png | clj -m alphasample.main 20 100.0
