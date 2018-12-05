@@ -42,6 +42,7 @@ resources/input/W_DJI-10, BE-1.png	2179	255	248	118	255
 This means, with headings:
 
 | File path | pixel number | R | G | B | A |
+| --------- | ------------ | - | - | - | - |
 | resources/input/W_DJI-10, BE-1.png | 1689 | 255 | 250 | 124 | 255 |
 | resources/input/W_DJI-10, BE-1.png | 1699 | 253 | 243 | 109 | 255 |
 | resources/input/W_DJI-10, BE-1.png | 1894 | 255 | 246 | 119 | 255 |
